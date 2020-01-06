@@ -8,9 +8,9 @@ func main() {
 
 	t := trie.New()
 
-	t.add("ant", "একটি")
+	t.Add("ant", "পিপীলিকা")
 
-	t.add("car", "গাড়ি")
+	t.Add("car", "গাড়ি")
 
 	meaning, ok := t.search("car")
 

@@ -13,7 +13,7 @@ func New() *Trie {
 	return t
 }
 
-func (t *Trie) add(s string, value string) {
+func (t *Trie) Add(s string, value string) {
 	if len(s) < 1 {
 		t.isWord = true
 		t.Value = value
@@ -29,10 +29,10 @@ func (t *Trie) add(s string, value string) {
 		t.Children[index] = New()
 	}
 
-	t.Children[index].add(s[1:], value)
+	t.Children[index].Add(s[1:], value)
 }
 
-func (t *Trie) search(keyword string) (string, bool) {
+func (t *Trie) Search(keyword string) (string, bool) {
 
 	if t == nil {
 		return "false", false
@@ -54,7 +54,7 @@ func (t *Trie) search(keyword string) (string, bool) {
 	return curr.Value, curr.isWord
 }
 
-func (t *Trie) suggestion(prefix string) (string, bool) {
+func (t *Trie) Suggestion(prefix string) (string, bool) {
 
 	if t == nil {
 		return "", false
