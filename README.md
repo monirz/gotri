@@ -39,6 +39,11 @@ Searching a character `a` with the previous example
 
 Will print `["act", "ant"]` 
 
-The last argument in the `Suggestion()` function is how many words do you want in the suggestion list.  
+The last argument in the `Suggestion()` function is how many words do you want in the suggestion list. 
+
+### Run Test 
+```
+$ go test 
+```
 
 
