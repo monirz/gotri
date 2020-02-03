@@ -1,26 +1,15 @@
-module github.com/monirz/ds/trie
+module github.com/monirz/trie
 
 go 1.12
 
 require (
-	dmitri.shuralyov.com/gpu/mtl v0.0.0-20191203043605-d42048ed14fd // indirect
-	fyne.io/fyne v1.2.1
-	github.com/go-gl/glfw v0.0.0-20191125211704-12ad95a8df72 // indirect
-	github.com/josephspurrier/goversioninfo v0.0.0-20190209210621-63e6d1acd3dd // indirect
-	github.com/spf13/afero v1.2.2 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.2.0 // indirect
-	github.com/stretchr/testify v1.4.0 // indirect
-	golang.org/x/crypto v0.0.0-20191227163750-53104e6ec876 // indirect
-	golang.org/x/exp v0.0.0-20191227195350-da58074b4299 // indirect
-	golang.org/x/image v0.0.0-20191214001246-9130b4cfad52 // indirect
-	golang.org/x/mobile v0.0.0-20191210151939-1a1fef82734d // indirect
-	golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553 // indirect
-	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e // indirect
-	golang.org/x/sys v0.0.0-20200103143344-a1369afcdac7 // indirect
-	golang.org/x/text v0.3.2 // indirect
-	golang.org/x/tools v0.0.0-20200103221440-774c71fcf114 // indirect
-	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 // indirect
-	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
-	gopkg.in/yaml.v2 v2.2.7 // indirect
+	github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20191125211704-12ad95a8df72 // indirect
+	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
+	github.com/google/gxui v0.0.0-20151028112939-f85e0a97b3a4 // indirect
+	github.com/gotk3/gotk3 v0.0.0-20200129211157-69caac910e50
+	github.com/goxjs/gl v0.0.0-20171128034433-dc8f4a9a3c9c // indirect
+	github.com/goxjs/glfw v0.0.0-20191126052801-d2efb5f20838 // indirect
+	github.com/zserge/webview v0.0.0-20200121135717-9c1b0a888aa4
+	golang.org/x/image v0.0.0-20200119044424-58c23975cae1 // indirect
 )
