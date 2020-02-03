@@ -3,11 +3,16 @@
 
 ### Usage 
 
-```
-$ go get -u github.com/monirz/trie
-```
-
 ```go
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/monirz/trie"
+)
+
 func main() {
 
 	t := trie.New()
@@ -17,7 +22,7 @@ func main() {
 
 	t.Add("car", "গাড়ি")
 
-	meaning, ok := t.search("car")
+	meaning, ok := t.Search("car")
 
 	if !ok {
 		fmt.Println("word not found")
