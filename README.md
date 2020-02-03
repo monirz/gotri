@@ -1,4 +1,4 @@
-# Trie for dictionary 
+# Trie Data Struture implementation in Go  
 
 
 ### Usage 
@@ -9,6 +9,7 @@ func main() {
 	t := trie.New()
 
 	t.Add("ant", "পিপীলিকা")
+	t.Add("act", "অভিনয় করা")
 
 	t.Add("car", "গাড়ি")
 
@@ -22,4 +23,22 @@ func main() {
 	fmt.Println(meaning)
 }
 
+``` 
+
+***Get Suggestion with prefix character*** 
+Searching a character `a` with the previous example 
 ```
+
+    tr = tr.Children[97]
+
+	wordList := []string{}
+
+	resultArr := Suggestion(tr, "a", &wordList, 3)  
+	fmt.Println(resultArr)
+``` 
+
+Will print `["act", "ant"]` 
+
+The last argument in the `Suggestion()` function is how many words do you want in the suggestion list.  
+
+
