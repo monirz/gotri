@@ -25,16 +25,17 @@ func main() {
 
 ``` 
 
-***Get Suggestion with prefix character*** 
-Searching a character `a` with the previous example 
+***Get Suggestion with with searching character*** 
+ 
+ Searching a character `a` with the previous example 
 ```
 
-    tr = tr.Children[97]
+tr = tr.Children[97]
 
-	wordList := []string{}
+wordList := []string{}
 
-	resultArr := Suggestion(tr, "a", &wordList, 3)  
-	fmt.Println(resultArr)
+resultArr := Suggestion(tr, "a", &wordList, 3)  
+fmt.Println(resultArr)
 ``` 
 
 Will print `["act", "ant"]` 
