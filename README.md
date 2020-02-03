@@ -3,6 +3,10 @@
 
 ### Usage 
 
+```
+$ go get -u github.com/monirz/trie
+```
+
 ```go
 func main() {
 
