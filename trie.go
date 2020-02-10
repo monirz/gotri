@@ -1,5 +1,9 @@
 package trie
 
+import (
+	"fmt"
+)
+
 var (
 	suggestionList = []string{}
 )
@@ -45,9 +49,8 @@ func (t *Trie) Search(keyword string) (string, bool) {
 	for i := 0; i < len(keyword); i++ {
 
 		letter := keyword[i]
-		// fmt.Println(letter)
 		index := letter
-		// fmt.Println("index", index)
+
 		curr = curr.Children[index]
 
 		if curr == nil {
@@ -58,6 +61,7 @@ func (t *Trie) Search(keyword string) (string, bool) {
 	return curr.Value, curr.isWord
 }
 
+//no node has value
 func isLastNode(t *Trie) bool {
 
 	for i := 0; i < 128; i++ {
@@ -91,19 +95,17 @@ func (t *Trie) PrintSuggestion(query string) {
 	wordList := []string{}
 
 	if !isLastNode(t) {
-		Suggestion(t, query, &wordList, 4)
+		_, result := Suggestion(t, query, &wordList, 5)
+
+		fmt.Println(result)
 	}
 
 }
 
-func Suggestion(t *Trie, prefix string, wordList *[]string, repeat int) *[]string {
+func Suggestion(t *Trie, prefix string, wordList *[]string, repeat int) (int, *[]string) {
 
 	if isLastNode(t) {
-		return wordList
-	}
-
-	if repeat == 0 {
-		return wordList
+		return repeat, wordList
 	}
 
 	for i := 0; i < 128; i++ {
@@ -117,19 +119,22 @@ func Suggestion(t *Trie, prefix string, wordList *[]string, repeat int) *[]strin
 			r = r.Children[i]
 
 			if r.isWord {
-				// fmt.Println(prefix)
 				*wordList = append(*wordList, prefix)
+				repeat--
+				return repeat, wordList
 			}
 
-			Suggestion(r, prefix, wordList, repeat)
-			repeat--
+			repeat, wordList = Suggestion(r, prefix, wordList, repeat)
 
 			prefix = prefix[0 : len(prefix)-1]
 
+			if repeat < 1 {
+				return 0, wordList
+			}
 		}
 
 	}
 
-	return wordList
+	return repeat, wordList
 
 }

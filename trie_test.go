@@ -13,7 +13,10 @@ var testData = []struct {
 	{"acting", "অভিনয়", "অভিনয়"},
 	{"abc", "ad", "ad"},
 	{"and", "এবং", "এবং"},
-	{"get up", "গাড়ি", "গাড়ি"},
+	{"abandon", "ত্যাগ করা", "ত্যাগ করা"},
+	{"abandoned", "পরিত্যক্ত", "পরিত্যক্ত"},
+	{"abyss", "অতল গহ্বর", "অতল গহ্বর"},
+	// {"get up", "গাড়ি", "গাড়ি"},
 	// {"work", "কাজ করা", "কাজ করা"},
 	//TODO add more test data
 }
@@ -24,10 +27,12 @@ var testSuggestionData = []struct {
 	expectedWordList []string
 	expectedCount    int
 }{
-	{"a", 2, []string{"abc", "acting"}, 2},
-	{"a", 3, []string{"abc", "acting", "and"}, 3},
-	{"a", 4, []string{"abc", "acting", "and", "ants"}, 4},
-	{"get", 1, []string{"get up"}, 1},
+	{"a", 1, []string{"abandon"}, 1},
+	{"a", 2, []string{"abandon", "abandoned"}, 2},
+	{"a", 3, []string{"abandon", "abandoned", "abc"}, 3},
+	{"a", 4, []string{"abandon", "abandoned", "abc", "abyss"}, 4},
+	{"a", 5, []string{"abandon", "abandoned", "abc", "abyss", "and"}, 5},
+	// {"get", 1, []string{"get up"}, 1},
 }
 
 var tr = New()
@@ -47,6 +52,7 @@ func TestAdd(t *testing.T) {
 			t.Errorf("Expected %v, got %v", v.expected, val)
 		}
 	}
+
 }
 
 func TestSearch(t *testing.T) {
@@ -72,10 +78,11 @@ func TestSuggestion(t *testing.T) {
 
 	for _, val := range testSuggestionData {
 
-		//move to next position node from the searching character
+		// 	//move to next position node from the searching character
 		for i := 0; i < len(val.searchCharacter); i++ {
 			index := val.searchCharacter[i]
-
+			// fmt.Println("index", index)
+			index = index - 'a'
 			if tr.Children[index] == nil {
 				return
 			}
@@ -85,7 +92,7 @@ func TestSuggestion(t *testing.T) {
 
 		wordList := []string{}
 
-		resultArr := Suggestion(tr, "a", &wordList, val.total)
+		_, resultArr := Suggestion(tr, "a", &wordList, val.total)
 
 		if len(*resultArr) != val.expectedCount {
 			t.Errorf("Expected %v, got %v", val.expectedCount, len(*resultArr))
@@ -98,4 +105,5 @@ func TestSuggestion(t *testing.T) {
 		}
 
 	}
+	// tr.PrintSuggestion("a")
 }

@@ -3,6 +3,7 @@ module github.com/monirz/trie
 go 1.12
 
 require (
+	github.com/ethereum/go-ethereum v1.9.10
 	github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20191125211704-12ad95a8df72 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
