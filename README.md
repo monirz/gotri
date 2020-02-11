@@ -19,6 +19,7 @@ func main() {
 
 	t.Add("ant", "পিপীলিকা")
 	t.Add("act", "অভিনয় করা")
+	t.Add("abc", "")
 
 	t.Add("car", "গাড়ি")
 
@@ -43,13 +44,13 @@ tr = tr.Children[97]
 
 wordList := []string{}
 
-resultArr := Suggestion(tr, "a", &wordList, 3)  
+resultArr := tr.GetSuggestion("a", 2)  
 fmt.Println(resultArr)
 ``` 
 
-Will print `["act", "ant"]` 
+Will print `["abc", "act"]` 
 
-The last argument in the `Suggestion()` function is how many words do you want in the suggestion list. 
+The last argument in the `GetSuggestion()` function is how many words do you want in the suggestion list. 
 
 ### Run Test 
 ```

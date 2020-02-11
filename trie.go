@@ -1,9 +1,5 @@
 package trie
 
-import (
-	"fmt"
-)
-
 var (
 	suggestionList = []string{}
 )
@@ -62,6 +58,7 @@ func (t *Trie) Search(keyword string) (string, bool) {
 }
 
 //no node has value
+//basically end of the node
 func isLastNode(t *Trie) bool {
 
 	for i := 0; i < 128; i++ {
@@ -75,41 +72,55 @@ func isLastNode(t *Trie) bool {
 }
 
 //TODO return the value to make it testable
-func (t *Trie) PrintSuggestion(query string) {
+func (t *Trie) GetSuggestion(query string, total int) []string {
 
+	var result []string
 	//move to next position node from the searching character
 	for i := 0; i < len(query); i++ {
 		index := query[i]
 
 		if t.Children[index] == nil {
-			return
+			return result
 		}
 
 		t = t.Children[index]
 	}
 
+	//it's a word and has no child node
+	//return the search keyword in the array
 	if t.isWord && isLastNode(t) {
-		return
+		result = append(result, query)
+
+		return result
 	}
 
 	wordList := []string{}
 
-	if !isLastNode(t) {
-		_, result := Suggestion(t, query, &wordList, 5)
-
-		fmt.Println(result)
+	//check if the searching word already is a word
+	//tappend if true
+	if t.isWord {
+		wordList = append(wordList, query)
+		total--
 	}
 
+	if !isLastNode(t) {
+		_, result = Suggestion(t, query, wordList, total)
+		return result
+	}
+
+	return result
 }
 
-func Suggestion(t *Trie, prefix string, wordList *[]string, repeat int) (int, *[]string) {
+func Suggestion(t *Trie, prefix string, wordList []string, repeat int) (int, []string) {
 
 	if isLastNode(t) {
 		return repeat, wordList
 	}
 
 	for i := 0; i < 128; i++ {
-
+		if repeat < 1 {
+			return repeat, wordList
+		}
 		r := t
 		if t.Children[i] != nil {
 
@@ -119,18 +130,14 @@ func Suggestion(t *Trie, prefix string, wordList *[]string, repeat int) (int, *[
 			r = r.Children[i]
 
 			if r.isWord {
-				*wordList = append(*wordList, prefix)
+				wordList = append(wordList, prefix)
 				repeat--
-				return repeat, wordList
 			}
 
 			repeat, wordList = Suggestion(r, prefix, wordList, repeat)
 
+			// fmt.Println(prefix)
 			prefix = prefix[0 : len(prefix)-1]
-
-			if repeat < 1 {
-				return 0, wordList
-			}
 		}
 
 	}
