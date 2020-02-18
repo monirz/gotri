@@ -1,8 +1,9 @@
 # Gotri 
 
-[![Coverage](https://gocover.io/_badge/github.com/monirz/trie)]
+[![Coverage](https://gocover.io/_badge/github.com/monirz/gotri)](https://gocover.io/github.com/monirz/trie) [![Actions Status](https://github.com/monirz/gotri/workflows/Build/badge.svg)](https://github.com/monirz/gotri/actions)
 
-Gotri is a Trie/prefix tree data structure implementation with suggestion/auto-complete search based on 128 ASCII character. So word like this `café` with the latin `é` would also work for insertion and searching.      
+
+**Gotri** is an ASCII character based [Trie/prefix tree](https://en.wikipedia.org/wiki/Trie) implementation with the suggestion/auto-complete search functionality. It supports 128 ASCII character, so word like this: `café` with the latin `é` would also work for insertion and searching.      
 
 
 ### Usage 
@@ -43,7 +44,7 @@ func main() {
  
  Searching a character `a` with the inserted words from the previous example. 
 
-```
+```go
 resultArr := t.GetSuggestion("a", 2)  
 fmt.Println(resultArr)
 ``` 
