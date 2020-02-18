@@ -1,4 +1,8 @@
-# Trie Data Struture implementation in Go  
+# Gotri 
+
+[![Coverage](https://gocover.io/_badge/github.com/monirz/trie)]
+
+Gotri is a Trie/prefix tree data structure implementation with suggestion/auto-complete search based on 128 ASCII character. So word like this `café` with the latin `é` would also work for insertion and searching.      
 
 
 ### Usage 
@@ -15,7 +19,7 @@ import (
 
 func main() {
 
-	t := trie.New()
+	t := gotri.New()
 
 	t.Add("ant", "পিপীলিকা")
 	t.Add("act", "অভিনয় করা")
@@ -35,26 +39,22 @@ func main() {
 
 ``` 
 
-***Get Suggestion with with searching character*** 
+## Get Suggestion list with the prefix character 
  
- Searching a character `a` with the previous example 
+ Searching a character `a` with the inserted words from the previous example. 
+
 ```
-
-tr = tr.Children[97]
-
-wordList := []string{}
-
-resultArr := tr.GetSuggestion("a", 2)  
+resultArr := t.GetSuggestion("a", 2)  
 fmt.Println(resultArr)
 ``` 
 
-Will print `["abc", "act"]` 
+Will return an array like this: `["abc", "act"]` 
 
-The last argument in the `GetSuggestion()` function is how many words do you want in the suggestion list. 
+The last argument in the `GetSuggestion()` function is how many words you want in the suggestion list. 
 
 ### Run Test 
 ```
-$ go test 
+$ go test -v .
 ```
 
 

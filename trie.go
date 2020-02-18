@@ -1,4 +1,4 @@
-package trie
+package gotri
 
 var (
 	suggestionList = []string{}
@@ -38,7 +38,7 @@ func (t *Trie) Add(s string, value string) {
 func (t *Trie) Search(keyword string) (string, bool) {
 
 	if t == nil {
-		return "false", false
+		return "", false
 	}
 
 	curr := t
@@ -105,7 +105,6 @@ func (t *Trie) GetSuggestion(query string, total int) []string {
 
 	if !isLastNode(t) {
 		_, result = Suggestion(t, query, wordList, total)
-		return result
 	}
 
 	return result
