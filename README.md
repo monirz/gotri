@@ -1,6 +1,6 @@
 # Gotri 
 
-[![Coverage](https://gocover.io/_badge/github.com/monirz/gotri)](https://gocover.io/github.com/monirz/trie) [![Actions Status](https://github.com/monirz/gotri/workflows/Build/badge.svg)](https://github.com/monirz/gotri/actions)
+[![Coverage](https://gocover.io/_badge/github.com/monirz/gotri)](https://gocover.io/github.com/monirz/trie) [![Actions Status](https://github.com/monirz/gotri/workflows/build/badge.svg)](https://github.com/monirz/gotri/actions)
 
 
 **Gotri** is an Unicode character based [Trie/prefix tree](https://en.wikipedia.org/wiki/Trie) implementation in Go, with the suggestion/auto-complete feature for character searching. Since it supports Unicode characters, so word like `café` with the latin `é` would also work for the insertion and searching.      
