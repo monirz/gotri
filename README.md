@@ -3,7 +3,7 @@
 [![Coverage](https://gocover.io/_badge/github.com/monirz/gotri)](https://gocover.io/github.com/monirz/trie) [![Actions Status](https://github.com/monirz/gotri/workflows/Build/badge.svg)](https://github.com/monirz/gotri/actions)
 
 
-**Gotri** is an ASCII character based [Trie/prefix tree](https://en.wikipedia.org/wiki/Trie) implementation with the suggestion/auto-complete search functionality. It supports 128 ASCII character, so word like `café` with the latin `é` would also work for the insertion and searching.      
+**Gotri** is an Unicode character based [Trie/prefix tree](https://en.wikipedia.org/wiki/Trie) implementation in Go, with the suggestion/auto-complete feature for character searching. Since it supports Unicode characters, so word like `café` with the latin `é` would also work for the insertion and searching.      
 
 
 ### Usage 
@@ -23,8 +23,10 @@ func main() {
 	t := gotri.New()
 
 	t.Add("ant", "পিপীলিকা")
-	t.Add("act", "অভিনয় করা")
-	t.Add("abc", "")
+	t.Add("abc", "letters") 
+	t.Add("act", "to behave in the stated way")
+	t.Add("and", "used to join two words")
+	t.Add("café", "a restaurant where simple and usually quite cheap meals are served")
 
 	t.Add("car", "গাড়ি")
 

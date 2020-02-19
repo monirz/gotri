@@ -5,7 +5,7 @@ var (
 )
 
 type Trie struct {
-	Children [128]*Trie
+	Children [512]*Trie
 	isWord   bool
 	Value    string
 }
@@ -61,7 +61,7 @@ func (t *Trie) Search(keyword string) (string, bool) {
 //basically end of the node
 func isLastNode(t *Trie) bool {
 
-	for i := 0; i < 128; i++ {
+	for i := 0; i < 512; i++ {
 		if t.Children[i] != nil {
 			return false
 		}
@@ -90,7 +90,6 @@ func (t *Trie) GetSuggestion(query string, total int) []string {
 	//return the search keyword in the array
 	if t.isWord && isLastNode(t) {
 		result = append(result, query)
-
 		return result
 	}
 
@@ -113,10 +112,15 @@ func (t *Trie) GetSuggestion(query string, total int) []string {
 func Suggestion(t *Trie, prefix string, wordList []string, repeat int) (int, []string) {
 
 	if isLastNode(t) {
+
+		if t.isWord && len(wordList) < 1 {
+			wordList = append(wordList, prefix)
+		}
+
 		return repeat, wordList
 	}
 
-	for i := 0; i < 128; i++ {
+	for i := 0; i < 512; i++ {
 		if repeat < 1 {
 			return repeat, wordList
 		}

@@ -5,12 +5,12 @@ import (
 )
 
 var testData = []struct {
-	engWord  string
-	bengWord string
+	word     string
+	value    string
 	expected string
 }{
 	{"ants", "পিপীলিকা", "পিপীলিকা"},
-	{"acting", "অভিনয়", "অভিনয়"},
+	{"acting", "to behave in the stated way", "to behave in the stated way"},
 	{"abc", "ad", "ad"},
 	{"and", "এবং", "এবং"},
 	{"abandon", "ত্যাগ করা", "ত্যাগ করা"},
@@ -21,19 +21,19 @@ var testData = []struct {
 	{"babbl", "", ""},
 	{"book", "", ""},
 	{"books", "", ""},
-	// {"get up", "গাড়ি", "গাড়ি"},
-	// {"work", "কাজ করা", "কাজ করা"},
+	{"café", "a restaurant where simple and usually quite cheap meals are served", "a restaurant where simple and usually quite cheap meals are served"},
+	{"get up", "to stand up", "to stand up"}, //test with space character
 	//TODO add more test data
 }
 
 var testSearchData = []struct {
-	engWord  string
-	bengWord string
+	word     string
+	value    string
 	expected string
 	found    bool
 }{
 	{"ants", "পিপীলিকা", "পিপীলিকা", true},
-	{"acting", "অভিনয়", "অভিনয়", true},
+	{"acting", "to behave in the stated way", "to behave in the stated way", true},
 	{"abc", "ad", "ad", true},
 	{"and", "এবং", "এবং", true},
 	{"abandon", "ত্যাগ করা", "ত্যাগ করা", true},
@@ -45,6 +45,7 @@ var testSearchData = []struct {
 	{"book", "", "", true},
 	{"books", "", "", true},
 	{"okkk", "", "", false},
+	{"café", "a restaurant where simple and usually quite cheap meals are served", "a restaurant where simple and usually quite cheap meals are served", true},
 }
 
 var testSuggestionData = []struct {
@@ -53,6 +54,7 @@ var testSuggestionData = []struct {
 	expectedWordList []string
 	expectedCount    int
 }{
+	{"café", 1, []string{"café"}, 1},
 	{"okkk", 1, []string{}, 0}, //test for item that doesn't exist in the tree
 	{"a", 1, []string{"abandon"}, 1},
 	{"a", 2, []string{"abandon", "abandoned"}, 2},
@@ -61,7 +63,7 @@ var testSuggestionData = []struct {
 	{"a", 5, []string{"abandon", "abandoned", "abc", "abyss", "acting"}, 5},
 	{"book", 2, []string{"book", "books"}, 2}, //test for a complete word in the suggestion
 	{"books", 1, []string{"books"}, 1},        //test for only one word in the tree
-	// {"get", 1, []string{"get up"}, 1},
+	{"get", 1, []string{"get up"}, 1},
 }
 
 var tr = New()
@@ -69,9 +71,9 @@ var tr = New()
 func TestAdd(t *testing.T) {
 
 	for _, v := range testData {
-		tr.Add(v.engWord, v.bengWord)
+		tr.Add(v.word, v.value)
 
-		val, ok := tr.Search(v.engWord)
+		val, ok := tr.Search(v.word)
 
 		if !ok {
 			t.Errorf("Expected %v, got %v", true, ok)
@@ -88,7 +90,7 @@ func TestSearch(t *testing.T) {
 
 	for _, v := range testSearchData {
 
-		val, ok := tr.Search(v.engWord)
+		val, ok := tr.Search(v.word)
 		if v.found != ok {
 			t.Errorf("Expected %v, got %v", v.found, ok)
 		}
@@ -113,7 +115,6 @@ func TestSearch(t *testing.T) {
 
 func TestSuggestion(t *testing.T) {
 
-	// tr = New()
 	for _, val := range testSuggestionData {
 
 		// 	//move to next position node from the searching character
@@ -132,6 +133,7 @@ func TestSuggestion(t *testing.T) {
 		_, resultArr := Suggestion(tr, val.searchCharacter, wordList, val.total)
 
 		if len(resultArr) != val.expectedCount {
+			// fmt.Println(val.expectedWordList, resultArr)
 			t.Errorf("Expected %v, got %v", val.expectedCount, len(resultArr))
 		}
 
@@ -151,9 +153,9 @@ func TestGetSuggestion(t *testing.T) {
 
 	//add the data to the tree and start from root node
 	for _, v := range testData {
-		tr.Add(v.engWord, v.bengWord)
+		tr.Add(v.word, v.value)
 
-		val, ok := tr.Search(v.engWord)
+		val, ok := tr.Search(v.word)
 
 		if !ok {
 			t.Errorf("Expected %v, got %v", true, ok)
