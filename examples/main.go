@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/monirz/trie"
+	"github.com/monirz/gotri"
 )
 
 func main() {
 
-	t := trie.New()
+	t := gotri.New()
 
 	t.Add("ant", "পিপীলিকা")
 	t.Add("act", "অভিনয় করা")
